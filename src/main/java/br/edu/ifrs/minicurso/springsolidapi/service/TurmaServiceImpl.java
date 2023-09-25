@@ -3,19 +3,26 @@ package br.edu.ifrs.minicurso.springsolidapi.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.edu.ifrs.minicurso.springsolidapi.dto.TurmaDTO;
+import br.edu.ifrs.minicurso.springsolidapi.model.Aluno;
 import br.edu.ifrs.minicurso.springsolidapi.model.Disciplina;
 import br.edu.ifrs.minicurso.springsolidapi.model.Turma;
 import br.edu.ifrs.minicurso.springsolidapi.repository.TurmaRepository;
 import br.edu.ifrs.minicurso.springsolidapi.service.interfaces.TurmaService;
 
-public class TurmaServiceImpl implements TurmaService{
+@Service
+public class TurmaServiceImpl implements TurmaService {
 
     @Autowired
     private TurmaRepository turmaRepository;
+
     @Autowired
     private DisciplinaServiceImpl disciplinaServiceImpl;
+
+    @Autowired
+    private AlunoServiceImpl alunoServiceImpl;
 
     @Override
     public List<Turma> getAll() {
@@ -34,7 +41,7 @@ public class TurmaServiceImpl implements TurmaService{
 
         turma.setNome(turmaDto.nome());
         turma.setDisciplina(disciplina);
-        
+
         return turmaRepository.save(turma);
     }
 
@@ -45,7 +52,7 @@ public class TurmaServiceImpl implements TurmaService{
 
         turma.setNome(turmaDto.nome());
         turma.setDisciplina(disciplina);
-        
+
         return turmaRepository.save(turma);
     }
 
@@ -58,5 +65,35 @@ public class TurmaServiceImpl implements TurmaService{
             return false;
         }
     }
-    
+
+    public Turma addAluno(int turma_id, int aluno_id) throws Exception {
+        Aluno aluno = alunoServiceImpl.getById(aluno_id);
+        Turma turma = getById(turma_id);
+
+        if (turma.getAlunos().contains(aluno)) {
+            throw new IllegalArgumentException("Aluno já está inserido na turma.");
+        }
+
+        turma.getAlunos().add(aluno);
+        aluno.getTurmas().add(turma);
+        turmaRepository.save(turma);
+        alunoServiceImpl.save(aluno);
+        return turma;
+    }
+
+    public Turma removeAluno(int turma_id, int aluno_id) throws Exception {
+        Aluno aluno = alunoServiceImpl.getById(aluno_id);
+        Turma turma = getById(turma_id);
+
+        if (!turma.getAlunos().contains(aluno)) {
+            throw new IllegalArgumentException("Aluno não pertenca a turma.");
+        }
+
+        turma.getAlunos().remove(aluno);
+        aluno.getTurmas().remove(turma);
+        turmaRepository.save(turma);
+        alunoServiceImpl.save(aluno);
+        return turma;
+    }
+
 }
