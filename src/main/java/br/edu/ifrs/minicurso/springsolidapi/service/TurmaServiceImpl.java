@@ -10,6 +10,8 @@ import br.edu.ifrs.minicurso.springsolidapi.model.Aluno;
 import br.edu.ifrs.minicurso.springsolidapi.model.Disciplina;
 import br.edu.ifrs.minicurso.springsolidapi.model.Turma;
 import br.edu.ifrs.minicurso.springsolidapi.repository.TurmaRepository;
+import br.edu.ifrs.minicurso.springsolidapi.service.interfaces.AlunoService;
+import br.edu.ifrs.minicurso.springsolidapi.service.interfaces.DisciplinaService;
 import br.edu.ifrs.minicurso.springsolidapi.service.interfaces.TurmaService;
 
 @Service
@@ -19,10 +21,10 @@ public class TurmaServiceImpl implements TurmaService {
     private TurmaRepository turmaRepository;
 
     @Autowired
-    private DisciplinaServiceImpl disciplinaServiceImpl;
+    private DisciplinaService disciplinaService;
 
     @Autowired
-    private AlunoServiceImpl alunoServiceImpl;
+    private AlunoService alunoService;
 
     @Override
     public List<Turma> getAll() {
@@ -37,7 +39,7 @@ public class TurmaServiceImpl implements TurmaService {
     @Override
     public Turma save(TurmaDTO turmaDto) throws Exception {
         Turma turma = new Turma();
-        Disciplina disciplina = disciplinaServiceImpl.getById(turmaDto.disciplina_id());
+        Disciplina disciplina = disciplinaService.getById(turmaDto.disciplina_id());
 
         turma.setNome(turmaDto.nome());
         turma.setDisciplina(disciplina);
@@ -48,7 +50,7 @@ public class TurmaServiceImpl implements TurmaService {
     @Override
     public Turma update(int id, TurmaDTO turmaDto) throws Exception {
         Turma turma = getById(id);
-        Disciplina disciplina = disciplinaServiceImpl.getById(turmaDto.disciplina_id());
+        Disciplina disciplina = disciplinaService.getById(turmaDto.disciplina_id());
 
         turma.setNome(turmaDto.nome());
         turma.setDisciplina(disciplina);
@@ -67,7 +69,7 @@ public class TurmaServiceImpl implements TurmaService {
     }
 
     public Turma addAluno(int turma_id, int aluno_id) throws Exception {
-        Aluno aluno = alunoServiceImpl.getById(aluno_id);
+        Aluno aluno = alunoService.getById(aluno_id);
         Turma turma = getById(turma_id);
 
         if (turma.getAlunos().contains(aluno)) {
@@ -77,12 +79,12 @@ public class TurmaServiceImpl implements TurmaService {
         turma.getAlunos().add(aluno);
         aluno.getTurmas().add(turma);
         turmaRepository.save(turma);
-        alunoServiceImpl.save(aluno);
+        alunoService.save(aluno);
         return turma;
     }
 
     public Turma removeAluno(int turma_id, int aluno_id) throws Exception {
-        Aluno aluno = alunoServiceImpl.getById(aluno_id);
+        Aluno aluno = alunoService.getById(aluno_id);
         Turma turma = getById(turma_id);
 
         if (!turma.getAlunos().contains(aluno)) {
@@ -92,7 +94,7 @@ public class TurmaServiceImpl implements TurmaService {
         turma.getAlunos().remove(aluno);
         aluno.getTurmas().remove(turma);
         turmaRepository.save(turma);
-        alunoServiceImpl.save(aluno);
+        alunoService.save(aluno);
         return turma;
     }
 

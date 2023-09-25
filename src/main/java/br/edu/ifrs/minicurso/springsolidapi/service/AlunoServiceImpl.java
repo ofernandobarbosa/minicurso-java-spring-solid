@@ -45,6 +45,7 @@ public class AlunoServiceImpl implements AlunoService {
     }
 
     // Sobrecarga do método de salvar aluno.
+    @Override
     public Aluno save(Aluno aluno) {
         return alunoRepository.save(aluno);
     }

@@ -16,6 +16,8 @@ public interface AlunoService {
 
     Aluno save(AlunoDTO alunoDto);
 
+    Aluno save(Aluno aluno);
+
     Aluno update(int id, AlunoDTO alunoDto) throws Exception;
 
     boolean delete(int id);
