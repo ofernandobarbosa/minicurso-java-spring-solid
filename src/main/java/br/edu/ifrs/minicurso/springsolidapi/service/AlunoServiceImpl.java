@@ -2,6 +2,7 @@ package br.edu.ifrs.minicurso.springsolidapi.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifrs.minicurso.springsolidapi.dto.AlunoDTO;
@@ -12,6 +13,7 @@ import br.edu.ifrs.minicurso.springsolidapi.service.interfaces.AlunoService;
 @Service
 public class AlunoServiceImpl implements AlunoService{
 
+    @Autowired
     private AlunoRepository alunoRepository;
 
     @Override

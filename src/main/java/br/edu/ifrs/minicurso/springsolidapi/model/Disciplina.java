@@ -21,7 +21,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class Disciplina {
-    
+
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,8 +32,8 @@ public class Disciplina {
 
     @Column(nullable = false)
     private Integer semestre;
-    
+
     @OneToMany(mappedBy = "disciplina")
     private List<Turma> turmas;
-    
+
 }
