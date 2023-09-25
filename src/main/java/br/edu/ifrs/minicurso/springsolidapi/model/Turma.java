@@ -25,25 +25,21 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class Turma {
-    
+
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
+
     @Column(length = 255, unique = true, nullable = false)
     private String nome;
-    
+
     @ManyToOne
     @JoinColumn(name = "disciplina_id")
     private Disciplina disciplina;
-    
+
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-        name = "aluno_turma",
-        joinColumns = @JoinColumn(name = "turma_id"),
-        inverseJoinColumns = @JoinColumn(name = "aluno_id")
-    )
+    @JoinTable(name = "aluno_turma", joinColumns = @JoinColumn(name = "turma_id"), inverseJoinColumns = @JoinColumn(name = "aluno_id"))
     private List<Aluno> alunos;
-    
+
 }
