@@ -2,6 +2,8 @@ package br.edu.ifrs.minicurso.springsolidapi.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,10 +38,12 @@ public class Turma {
 
     @ManyToOne
     @JoinColumn(name = "disciplina_id")
+    @JsonIgnoreProperties("turmas")
     private Disciplina disciplina;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "aluno_turma", joinColumns = @JoinColumn(name = "turma_id"), inverseJoinColumns = @JoinColumn(name = "aluno_id"))
+    @JsonIgnoreProperties("turmas")
     private List<Aluno> alunos;
 
 }
