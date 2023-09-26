@@ -3,12 +3,14 @@ package br.edu.ifrs.minicurso.springsolidapi.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.edu.ifrs.minicurso.springsolidapi.dto.DisciplinaDTO;
 import br.edu.ifrs.minicurso.springsolidapi.model.Disciplina;
 import br.edu.ifrs.minicurso.springsolidapi.repository.DisciplinaRepository;
 import br.edu.ifrs.minicurso.springsolidapi.service.interfaces.DisciplinaService;
 
+@Service
 public class DisciplinaServiceImpl implements DisciplinaService {
 
     @Autowired

@@ -2,7 +2,8 @@ package br.edu.ifrs.minicurso.springsolidapi.model;
 
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,7 +41,8 @@ public class Aluno {
     @Column(length = 255, unique = true)
     private String email;
     
-    @ManyToMany(mappedBy = "alunos", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "alunos")
+    @JsonIgnoreProperties("alunos")
     private List<Turma> turmas;
     
 }
