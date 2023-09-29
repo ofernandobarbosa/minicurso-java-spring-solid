@@ -32,7 +32,7 @@ public class DisciplinaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Disciplina> getById(@PathVariable int id) throws Exception {
+    public ResponseEntity<Disciplina> getById(@PathVariable int id) {
         Disciplina disciplina = disciplinaService.getById(id);
         return ResponseEntity.ok().body(disciplina);
     }
@@ -44,7 +44,7 @@ public class DisciplinaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Disciplina> update(@PathVariable int id, @RequestBody DisciplinaDTO disciplinaDto) throws Exception {
+    public ResponseEntity<Disciplina> update(@PathVariable int id, @RequestBody DisciplinaDTO disciplinaDto) {
         Disciplina disciplina = disciplinaService.update(id, disciplinaDto);
         return ResponseEntity.ok().body(disciplina);
     }

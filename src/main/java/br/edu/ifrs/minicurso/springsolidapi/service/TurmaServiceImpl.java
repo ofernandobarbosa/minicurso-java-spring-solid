@@ -32,12 +32,12 @@ public class TurmaServiceImpl implements TurmaService {
     }
 
     @Override
-    public Turma getById(int id) throws Exception {
-        return turmaRepository.findById(id).orElseThrow(() -> new Exception("Turma não encontrada."));
+    public Turma getById(int id) {
+        return turmaRepository.findById(id).orElseThrow(() -> new ServiceException("Turma não encontrada."));
     }
 
     @Override
-    public Turma save(TurmaDTO turmaDto) throws Exception {
+    public Turma save(TurmaDTO turmaDto) {
         Turma turma = new Turma();
         Disciplina disciplina = disciplinaService.getById(turmaDto.disciplina_id());
 
@@ -48,7 +48,7 @@ public class TurmaServiceImpl implements TurmaService {
     }
 
     @Override
-    public Turma update(int id, TurmaDTO turmaDto) throws Exception {
+    public Turma update(int id, TurmaDTO turmaDto) {
         Turma turma = getById(id);
         Disciplina disciplina = disciplinaService.getById(turmaDto.disciplina_id());
 
@@ -68,7 +68,7 @@ public class TurmaServiceImpl implements TurmaService {
         }
     }
 
-    public Turma addAluno(int turma_id, int aluno_id) throws Exception {
+    public Turma matricular(int turma_id, int aluno_id) {
         Aluno aluno = alunoService.getById(aluno_id);
         Turma turma = getById(turma_id);
 
@@ -83,7 +83,7 @@ public class TurmaServiceImpl implements TurmaService {
         return turma;
     }
 
-    public Turma removeAluno(int turma_id, int aluno_id) throws Exception {
+    public Turma cancelarMatricula(int turma_id, int aluno_id) {
         Aluno aluno = alunoService.getById(aluno_id);
         Turma turma = getById(turma_id);
 

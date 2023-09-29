@@ -32,7 +32,7 @@ public class AlunoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Aluno> getById(@PathVariable int id) throws Exception {
+    public ResponseEntity<Aluno> getById(@PathVariable int id) {
         Aluno aluno = alunoService.getById(id);
         return ResponseEntity.ok().body(aluno);
     }
@@ -44,7 +44,7 @@ public class AlunoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Aluno> update(@PathVariable int id, @RequestBody AlunoDTO alunoDto) throws Exception {
+    public ResponseEntity<Aluno> update(@PathVariable int id, @RequestBody AlunoDTO alunoDto) {
         Aluno aluno = alunoService.update(id, alunoDto);
         return ResponseEntity.ok().body(aluno);
     }
