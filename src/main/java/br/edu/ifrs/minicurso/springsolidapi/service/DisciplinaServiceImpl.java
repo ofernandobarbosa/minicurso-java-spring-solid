@@ -22,9 +22,9 @@ public class DisciplinaServiceImpl implements DisciplinaService {
     }
 
     @Override
-    public Disciplina getById(int id) throws Exception {
+    public Disciplina getById(int id) {
         return disciplinaRepository.findById(id)
-                .orElseThrow(() -> new Exception("Disciplina não encontrada no banco de dados."));
+                .orElseThrow(() -> new ServiceException("Disciplina não encontrada no banco de dados."));
     }
 
     @Override
@@ -36,7 +36,7 @@ public class DisciplinaServiceImpl implements DisciplinaService {
     }
 
     @Override
-    public Disciplina update(int id, DisciplinaDTO disciplinaDto) throws Exception {
+    public Disciplina update(int id, DisciplinaDTO disciplinaDto) {
         Disciplina disciplina = getById(id);
         disciplina.setNome(disciplinaDto.nome());
         disciplina.setSemestre(disciplinaDto.semestre());

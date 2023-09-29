@@ -2,14 +2,14 @@ package br.edu.ifrs.minicurso.springsolidapi.service.interfaces;
 
 import java.util.List;
 
-public interface CrudService<T, S> {
+public interface CrudService<T, DTO> {
     List<T> getAll();
 
-    T getById(int id) throws Exception;
+    T getById(int id);
 
-    T save(S dto);
+    T save(DTO dto);
 
-    T update(int id, S dto) throws Exception;
+    T update(int id, DTO dto);
 
     boolean delete(int id);
 }

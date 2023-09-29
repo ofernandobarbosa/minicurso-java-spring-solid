@@ -1,6 +1,7 @@
 package br.edu.ifrs.minicurso.springsolidapi.infrastructure;
 
 import br.edu.ifrs.minicurso.springsolidapi.dto.ExceptionDTO;
+import br.edu.ifrs.minicurso.springsolidapi.service.ServiceException;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import jakarta.persistence.EntityNotFoundException;
@@ -24,6 +25,12 @@ public class ExceptionHandlerController {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> threatNotFound404(Exception exception) {
+        ExceptionDTO exceptionDto = new ExceptionDTO(exception.getMessage(), "500");
+        return ResponseEntity.internalServerError().body(exceptionDto);
+    }
+    
+    @ExceptionHandler(ServiceException.class)
+    public ResponseEntity<Object> threatNotFound404(ServiceException exception) {
         ExceptionDTO exceptionDto = new ExceptionDTO(exception.getMessage(), "500");
         return ResponseEntity.internalServerError().body(exceptionDto);
     }

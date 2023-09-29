@@ -18,14 +18,16 @@ public class AlunoServiceImpl implements AlunoService {
     @Autowired
     private AlunoRepository alunoRepository;
 
+    private final Random random = new Random();
+
     @Override
     public List<Aluno> getAll() {
         return alunoRepository.findAll();
     }
 
     @Override
-    public Aluno getById(int id) throws Exception {
-        return alunoRepository.findById(id).orElseThrow(() -> new Exception("Aluno não encontrado."));
+    public Aluno getById(int id) {
+        return alunoRepository.findById(id).orElseThrow(() -> new ServiceException("Aluno não encontrado."));
     }
 
     @Override
@@ -51,7 +53,7 @@ public class AlunoServiceImpl implements AlunoService {
     }
 
     @Override
-    public Aluno update(int id, AlunoDTO alunoDto) throws Exception {
+    public Aluno update(int id, AlunoDTO alunoDto) {
         Aluno aluno = getById(id);
         aluno.setNome(alunoDto.nome());
         aluno.setSobrenome(alunoDto.sobrenome());
@@ -70,7 +72,6 @@ public class AlunoServiceImpl implements AlunoService {
     }
 
     private String generateMatricula() {
-        Random random = new Random();
         return String.format("%d%06d", Year.now().getValue(), random.nextInt(1000000));
     }
 

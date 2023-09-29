@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ifrs.minicurso.springsolidapi.dto.TurmaDTO;
@@ -32,19 +33,19 @@ public class TurmaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Turma> getById(@PathVariable int id) throws Exception {
+    public ResponseEntity<Turma> getById(@PathVariable int id) {
         Turma turma = turmaService.getById(id);
         return ResponseEntity.ok().body(turma);
     }
 
     @PostMapping
-    public ResponseEntity<Turma> save(@RequestBody TurmaDTO turmaDto) throws Exception {
+    public ResponseEntity<Turma> save(@RequestBody TurmaDTO turmaDto) {
         Turma turma = turmaService.save(turmaDto);
         return ResponseEntity.ok().body(turma);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Turma> update(@PathVariable int id, @RequestBody TurmaDTO turmaDto) throws Exception {
+    public ResponseEntity<Turma> update(@PathVariable int id, @RequestBody TurmaDTO turmaDto) {
         Turma turma = turmaService.update(id, turmaDto);
         return ResponseEntity.ok().body(turma);
     }
@@ -59,15 +60,15 @@ public class TurmaController {
         }
     }
     
-    @PostMapping("/{turma_id}/{aluno_id}")
-    public ResponseEntity<Turma> addAluno(@PathVariable int turma_id, @PathVariable int aluno_id) throws Exception {
-        Turma turma = turmaService.addAluno(turma_id, aluno_id);
+    @PostMapping("/{turma_id}/matricular")
+    public ResponseEntity<Turma> matricular(@PathVariable int turma_id, @RequestParam int aluno_id) {
+        Turma turma = turmaService.matricular(turma_id, aluno_id);
         return ResponseEntity.ok().body(turma);
     }
 
-    @DeleteMapping("/{turma_id}/{aluno_id}")
-    public ResponseEntity<Turma> removeAluno(@PathVariable int turma_id, @PathVariable int aluno_id) throws Exception {
-        Turma turma = turmaService.removeAluno(turma_id, aluno_id);
+    @DeleteMapping("/{turma_id}/cancelar-matricula")
+    public ResponseEntity<Turma> cancelarMatricula(@PathVariable int turma_id, @RequestParam int aluno_id) {
+        Turma turma = turmaService.cancelarMatricula(turma_id, aluno_id);
         return ResponseEntity.ok().body(turma);
     }
     
