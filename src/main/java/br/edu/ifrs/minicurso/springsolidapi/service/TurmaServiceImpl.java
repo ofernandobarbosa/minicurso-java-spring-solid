@@ -10,6 +10,7 @@ import br.edu.ifrs.minicurso.springsolidapi.model.Aluno;
 import br.edu.ifrs.minicurso.springsolidapi.model.Disciplina;
 import br.edu.ifrs.minicurso.springsolidapi.model.Turma;
 import br.edu.ifrs.minicurso.springsolidapi.repository.TurmaRepository;
+import br.edu.ifrs.minicurso.springsolidapi.service.exceptions.NotFoundException;
 import br.edu.ifrs.minicurso.springsolidapi.service.interfaces.AlunoService;
 import br.edu.ifrs.minicurso.springsolidapi.service.interfaces.DisciplinaService;
 import br.edu.ifrs.minicurso.springsolidapi.service.interfaces.TurmaService;
@@ -33,7 +34,7 @@ public class TurmaServiceImpl implements TurmaService {
 
     @Override
     public Turma getById(int id) {
-        return turmaRepository.findById(id).orElseThrow(() -> new ServiceException("Turma não encontrada."));
+        return turmaRepository.findById(id).orElseThrow(() -> new NotFoundException("Turma não encontrada.", 404));
     }
 
     @Override
@@ -88,7 +89,7 @@ public class TurmaServiceImpl implements TurmaService {
         Turma turma = getById(turma_id);
 
         if (!turma.getAlunos().contains(aluno)) {
-            throw new IllegalArgumentException("Aluno não pertenca a turma.");
+            throw new NotFoundException("Aluno não pertence a turma.", aluno_id);
         }
 
         turma.getAlunos().remove(aluno);

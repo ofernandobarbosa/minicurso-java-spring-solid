@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.edu.ifrs.minicurso.springsolidapi.dto.DisciplinaDTO;
 import br.edu.ifrs.minicurso.springsolidapi.model.Disciplina;
 import br.edu.ifrs.minicurso.springsolidapi.repository.DisciplinaRepository;
+import br.edu.ifrs.minicurso.springsolidapi.service.exceptions.NotFoundException;
 import br.edu.ifrs.minicurso.springsolidapi.service.interfaces.DisciplinaService;
 
 @Service
@@ -24,7 +25,7 @@ public class DisciplinaServiceImpl implements DisciplinaService {
     @Override
     public Disciplina getById(int id) {
         return disciplinaRepository.findById(id)
-                .orElseThrow(() -> new ServiceException("Disciplina não encontrada no banco de dados."));
+                .orElseThrow(() -> new NotFoundException("Disciplina não encontrada no banco de dados.", id));
     }
 
     @Override
@@ -49,7 +50,7 @@ public class DisciplinaServiceImpl implements DisciplinaService {
             disciplinaRepository.deleteById(id);
             return true;
         } else {
-            return false;
+            throw new NotFoundException(id);
         }
     }
 

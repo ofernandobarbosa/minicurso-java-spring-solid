@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import br.edu.ifrs.minicurso.springsolidapi.dto.AlunoDTO;
 import br.edu.ifrs.minicurso.springsolidapi.model.Aluno;
 import br.edu.ifrs.minicurso.springsolidapi.repository.AlunoRepository;
+import br.edu.ifrs.minicurso.springsolidapi.service.exceptions.NotFoundException;
 import br.edu.ifrs.minicurso.springsolidapi.service.interfaces.AlunoService;
 
 @Service
@@ -27,7 +28,7 @@ public class AlunoServiceImpl implements AlunoService {
 
     @Override
     public Aluno getById(int id) {
-        return alunoRepository.findById(id).orElseThrow(() -> new ServiceException("Aluno não encontrado."));
+        return alunoRepository.findById(id).orElseThrow(() -> new NotFoundException("Aluno não encontrado.", id));
     }
 
     @Override
