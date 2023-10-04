@@ -68,7 +68,7 @@ public class AlunoServiceImpl implements AlunoService {
             alunoRepository.deleteById(id);
             return true;
         } else {
-            return false;
+            throw new NotFoundException(id);
         }
     }
 

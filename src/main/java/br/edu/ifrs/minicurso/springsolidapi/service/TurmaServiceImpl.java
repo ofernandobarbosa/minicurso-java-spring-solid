@@ -65,7 +65,7 @@ public class TurmaServiceImpl implements TurmaService {
             turmaRepository.deleteById(id);
             return true;
         } else {
-            return false;
+            throw new NotFoundException(id);
         }
     }
 
