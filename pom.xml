@@ -14,8 +14,7 @@
 	<name>spring-solid-api</name>
 	<description>Projeto para minicurso de API Rest com Spring e Solid</description>
 	<properties>
-		<!-- #TODO Retornar para o 17, ao finalizar o projeto -->
-		<java.version>21</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

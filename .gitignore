@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# recursos off git
+src/main/resources/static
+Roteiro_do_minicurso.md
