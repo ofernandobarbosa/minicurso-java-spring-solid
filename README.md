@@ -5,13 +5,13 @@
 ### Configuração PostgreSQL
 
 * Executar pelo terminal:
-``` bash
-psql -h localhost -U postgres
-```
-
-``` sql
-CREATE DATABASE minicurso;
-```
+    ``` bash
+    psql -h localhost -U postgres
+    ```
+    
+    ``` sql
+    CREATE DATABASE minicurso;
+    ```
 
 ### application.properties
 
@@ -36,10 +36,10 @@ spring.jpa.show-sql=true
 ```
 
 * Executar pelo terminal:
-
-``` bash
-mvn spring-boot:run
-```
+    
+    ``` bash
+    mvn spring-boot:run
+    ```
 
 ### Modelagem Relacional
 
