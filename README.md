@@ -4,12 +4,13 @@
 
 ### Configuração PostgreSQL
 
+* Executar pelo terminal:
 ``` bash
 psql -h localhost -U postgres
 ```
 
 ``` sql
-CREATE DATABASE mini-curso;
+CREATE DATABASE minicurso;
 ```
 
 ### application.properties
